@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Bodega del Juan</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</head>
+<body style="background-color: #D8D8D8">
+	<div style="background-color: gray; text-align: center;" >
+		<br>
+	 	<h1 style="color: blue;">INVENTARIO</h1>
+		<h2 style="color: darkblue;">La Bodega del Juan</h2>
+		<br>
+	</div>
+	<div class="container p-4" style="text-align: center; padding: 2;">
+		<h2>Ingrese item</h2>
+		<p>
+			<div class="input-group mb-3">
+			<span class="input-group-text">Nombre</span>
+			<input type="text" name="nom" id="nom" class="form-control">
+			</div >
+			<div class="input-group mb-3">
+			<span class="input-group-text">Familia</span>
+			<input type="text" name="fam" id="fam" class="form-control">
+			</div>
+			<div class="input-group mb-3">
+			<span class="input-group-text">Valor</span> 
+			<input type="text" name="val" id="val" class="form-control">
+			</div>
+			<div class="input-group mb-3">
+			<span class="input-group-text">Cantidad</span> 
+			<input type="text" name="can" id="can" class="form-control">
+			</div>
+			
+			<button type="button" class="btn btn-primary" onclick="agregar();">Agregar</button>
+			<button type="button" class="btn btn-primary" onclick="total();">Calcular totales</button><br>
+			<br>
+			<div class="input-group mb-3">
+				<span class="input-group-text">Articulo a modificar</span>
+				<input type="text" name="art" id="art" class="form-control">
+				<span class="input-group-text">Cantidad a rebajar</span>
+				<input type="text" name="reb" id="reb" class="form-control">
+				<button type="button" class="btn btn-primary" onclick="modificar();">Modificar</button><br>
+			</div>
+			
+
+		</p>
+		<p id="ar">
+			<table class="table table-striped"></table>
+		</p>
+			<p id="total"></p>
+	</div>
+
+	<script type="text/javascript">
+		var nombre=[];
+		var familia=[];
+		var valor=[];
+		var cantidad=[];
+		
+		
+		function agregar(){
+			let v1=document.getElementById('nom').value;
+			let v2=document.getElementById("fam").value;
+			let v3=document.getElementById("val").value;
+			let v4=document.getElementById("can").value;
+			
+			document.getElementById('nom').value="";
+			document.getElementById('fam').value="";
+			document.getElementById('val').value="";
+			document.getElementById('can').value="";
+			nombre.push(v1);
+			familia.push(v2);
+			valor.push(v3);
+			cantidad.push(v4);
+			mostrar();
+		}
+
+		function mostrar(){
+			let fragmento="";
+			let cantidades=0;
+			fragmento="<table class='table table-striped'><tr><th>Item</th><th>Familia</th><th>Valor</th><th>Cantidad</th><th>Total neto $</th><th>Total c/IVA $</th>";
+			for (var i=0; i < nombre.length; i++){
+				fragmento+="<tr><td>"+nombre[i]+"</td>";
+				fragmento+="<td>"+familia[i]+"</td>";
+				fragmento+="<td>"+valor[i]+"</td>";
+				fragmento+="<td>"+cantidad[i]+"</td>";
+				fragmento+="<td>"+totales(i)+"</td>";
+				fragmento+="<td>"+iva(i)+"</td></tr>"
+			}
+			fragmento+="</table>";
+
+			document.getElementById('ar').innerHTML=fragmento;
+		}
+		function modificar(){
+			let artt=document.getElementById('art').value;
+			let rebb=parseInt(document.getElementById('reb').value);
+			document.getElementById('art').value="";
+			document.getElementById('reb').value="";
+			let resul1="";
+			let resul2=0;
+			for(var i = 0; i<nombre.length; i++){
+				if(artt==nombre[i] && cantidad[i]>=rebb){
+					resul2=parseInt(cantidad[i])-parseInt(rebb);
+					cantidad[i]=resul2;
+				}
+				mostrar();
+				total();
+			}			
+						
+		}
+		function totales(i){
+			let tot=parseInt(valor[i],10)*parseInt(cantidad[i],10);
+			return tot;
+		}
+		function iva(i){
+			let iva=totales(i)*1.19
+			return iva;
+		}
+		function total(){
+			let totalcantidades=0;
+			let total=0;
+			for(let i=0; i < nombre.length; i++){
+				totalcantidades=totalcantidades+parseInt(cantidad[i]);
+				total=total+parseInt(valor[i])*parseInt(cantidad[i]);
+				totalconiva=total*1.19;
+				totaliva=total*0.19;
+			}
+			
+			document.getElementById('total').innerHTML="<strong>Total productos: "+totalcantidades+"<br>Valor total Neto: $"+total+"<br>Valor total IVA: $"+totaliva+"<br>Valor total Bruto: $"+totalconiva+"</strong>";
+		}
+		
+
+	</script>
+
+</body>
+</html>
