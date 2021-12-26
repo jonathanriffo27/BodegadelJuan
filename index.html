@@ -113,21 +113,20 @@
 				if(artt==nombre[i] && cantidad[i]>=rebb){
 					resul=parseInt(cantidad[i])-parseInt(rebb);
 					cantidad[i]=resul;
-				}else if(cantidad[i]<rebb){
+				}else if(artt==nombre[i] && cantidad[i]<rebb){
 					alert("Cantidad superior a la existencia actual");
-				}
-				mostrar();
-				total();
-			}			
-						
+				}		
+			}				
+			mostrar();
+			total();	
 		}
 		function totales(i){
 			let tot=parseInt(valor[i],10)*parseInt(cantidad[i],10);
-			return tot;
+			return tot.toFixed(1);
 		}
 		function iva(i){
 			let iva=totales(i)*1.19
-			return iva;
+			return iva.toFixed(1);
 		}
 		function total(){
 			let totalcantidades=0;
@@ -139,7 +138,7 @@
 				totaliva=total*0.19;
 			}
 			
-			document.getElementById('total').innerHTML="<strong>Total productos: "+totalcantidades+"<br>Valor total Neto: $"+total+"<br>Valor total IVA: $"+totaliva+"<br>Valor total Bruto: $"+totalconiva+"</strong>";
+			document.getElementById('total').innerHTML="<strong>Total productos: "+totalcantidades+"<br>Valor total Neto: $"+total.toFixed(1)+"<br>Valor total IVA: $"+totaliva.toFixed(1)+"<br>Valor total Bruto: $"+totalconiva.toFixed(1)+"</strong>";
 		}
 		
 
