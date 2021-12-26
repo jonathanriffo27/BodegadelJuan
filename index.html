@@ -39,7 +39,8 @@
 			<br>
 			<div class="input-group mb-3">
 				<span class="input-group-text">Articulo a modificar</span>
-				<select name="option" id="option">
+				<select name="option" id="option" class="form-select">
+					<option>Articulo</option>
 				</select>
 				<!--<input type="text" name="art" id="art" class="form-control">-->
 				<span class="input-group-text">Cantidad a rebajar</span>
@@ -96,7 +97,7 @@
 		}
 		function option(){
 			let option="";
-			option="<select name='opciones'>";
+			option="<select name='opciones' class='form-select'>";
 			for (var i=0; i < nombre.length; i++){
 				option+="<option>"+nombre[i]+"</option>";
 			}
