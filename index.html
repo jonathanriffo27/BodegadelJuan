@@ -9,11 +9,9 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </head>
 <body style="background-color: #D8D8D8">
-	<div style="background-color: gray; text-align: center;" >
-		<br>
+	<div style="background-color: gray; text-align: center;" ><br>
 	 	<h1 style="color: blue;">INVENTARIO</h1>
-		<h2 style="color: darkblue;">La Bodega del Juan</h2>
-		<br>
+		<h2 style="color: darkblue;">La Bodega del Juan</h2><br>
 	</div>
 	<div class="container p-4" style="text-align: center; padding: 2;">
 		<h2>Ingrese item</h2>
@@ -34,13 +32,11 @@
 				<span class="input-group-text">Cantidad</span> 
 				<input type="number" name="can" id="can" class="form-control">
 			</div>			
-			<button type="button" class="btn btn-primary" onclick="agregar();">Agregar</button>
-			<button type="button" class="btn btn-primary" onclick="total();">Calcular totales</button><br>
-			<br>
+			<button type="button" class="btn btn-primary" onclick="agregar();">Agregar</button><br><br>
 			<div class="input-group mb-3">
 				<span class="input-group-text">Articulo a modificar</span>
 				<select name="option" id="option" class="form-select">
-					<option>Seleccione</option>
+					<option disabled selected>Seleccione</option>
 				</select>
 				<!--<input type="text" name="art" id="art" class="form-control">-->
 				<span class="input-group-text">Cantidad a rebajar</span>
@@ -77,19 +73,21 @@
 			cantidad.push(v4);
 			mostrar();
 			option();
+			total();
 		}
 
 		function mostrar(){
 			let fragmento="";
 			let cantidades=0;
-			fragmento="<table class='table table-striped'><tr><th>Item</th><th>Familia</th><th>Valor $</th><th>Cantidad</th><th>Total neto $</th><th>Total c/IVA $</th>";
+			fragmento="<table class='table table-striped'><tr><th>Item</th><th>Familia</th><th>Valor $</th><th>Cantidad</th><th>Total Neto $</th><th>Total IVA $</th><th>Total Bruto $</th>";
 			for (var i=0; i < nombre.length; i++){
 				fragmento+="<tr><td>"+nombre[i]+"</td>";
 				fragmento+="<td>"+familia[i]+"</td>";
 				fragmento+="<td>"+valor[i]+"</td>";
 				fragmento+="<td>"+cantidad[i]+"</td>";
 				fragmento+="<td>"+totales(i)+"</td>";
-				fragmento+="<td>"+iva(i)+"</td></tr>"
+				fragmento+="<td>"+iva(i)+"</td>";
+				fragmento+="<td>"+bruto(i)+"</td></tr>"
 			}
 			fragmento+="</table>";
 
@@ -97,7 +95,7 @@
 		}
 		function option(){
 			let option="";
-			option="<select name='opciones' class='form-select'>";
+			option="<select name='opciones' class='form-select'><option disabled selected>Seleccione</option>";
 			for (var i=0; i < nombre.length; i++){
 				option+="<option>"+nombre[i]+"</option>";
 			}
@@ -125,8 +123,12 @@
 			return tot.toFixed(1);
 		}
 		function iva(i){
-			let iva=totales(i)*1.19
+			let iva=totales(i)*0.19
 			return iva.toFixed(1);
+		}
+		function bruto(i){
+			let bruto=totales(i)*1.19
+			return bruto.toFixed(1);
 		}
 		function total(){
 			let totalcantidades=0;
