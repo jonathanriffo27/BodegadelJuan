@@ -39,9 +39,11 @@
 			<br>
 			<div class="input-group mb-3">
 				<span class="input-group-text">Articulo a modificar</span>
-				<input type="text" name="art" id="art" class="form-control">
+				<select name="option" id="option">
+				</select>
+				<!--<input type="text" name="art" id="art" class="form-control">-->
 				<span class="input-group-text">Cantidad a rebajar</span>
-				<input type="text" name="reb" id="reb" class="form-control">
+				<input type="number" name="reb" id="reb" class="form-control">
 				<button type="button" class="btn btn-primary" onclick="modificar();">Modificar</button><br>
 			</div>
 		</p>
@@ -73,6 +75,7 @@
 			valor.push(v3);
 			cantidad.push(v4);
 			mostrar();
+			option();
 		}
 
 		function mostrar(){
@@ -91,10 +94,18 @@
 
 			document.getElementById('ar').innerHTML=fragmento;
 		}
+		function option(){
+			let option="";
+			option="<select name='opciones'>";
+			for (var i=0; i < nombre.length; i++){
+				option+="<option>"+nombre[i]+"</option>";
+			}
+			option+="</select>";
+			document.getElementById('option').innerHTML=option;
+		}
 		function modificar(){
-			let artt=document.getElementById('art').value;
+			let artt=document.getElementById('option').value;
 			let rebb=parseInt(document.getElementById('reb').value);
-			document.getElementById('art').value="";
 			document.getElementById('reb').value="";
 			let resul1="";
 			let resul2=0;
