@@ -28,11 +28,11 @@
 			</div>
 			<div class="input-group mb-3">
 				<span class="input-group-text">Valor</span> 
-				<input type="text" name="val" id="val" class="form-control">
+				<input type="number" name="val" id="val" class="form-control">
 			</div>
 			<div class="input-group mb-3">
 				<span class="input-group-text">Cantidad</span> 
-				<input type="text" name="can" id="can" class="form-control">
+				<input type="number" name="can" id="can" class="form-control">
 			</div>			
 			<button type="button" class="btn btn-primary" onclick="agregar();">Agregar</button>
 			<button type="button" class="btn btn-primary" onclick="total();">Calcular totales</button><br>
@@ -108,12 +108,13 @@
 			let artt=document.getElementById('option').value;
 			let rebb=parseInt(document.getElementById('reb').value);
 			document.getElementById('reb').value="";
-			let resul1="";
-			let resul2=0;
+			let resul=0;
 			for(var i = 0; i<nombre.length; i++){
 				if(artt==nombre[i] && cantidad[i]>=rebb){
-					resul2=parseInt(cantidad[i])-parseInt(rebb);
-					cantidad[i]=resul2;
+					resul=parseInt(cantidad[i])-parseInt(rebb);
+					cantidad[i]=resul;
+				}else if(cantidad[i]<rebb){
+					alert("Cantidad superior a la existencia actual");
 				}
 				mostrar();
 				total();
