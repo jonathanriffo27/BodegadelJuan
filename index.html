@@ -15,7 +15,6 @@
 	</div>
 	<div class="container p-4" style="text-align: center; padding: 2;">
 		<h2>Ingrese item</h2>
-		<p>
 			<div class="input-group mb-3">
 				<span class="input-group-text">Nombre</span>
 				<input type="text" name="nom" id="nom" class="form-control">
@@ -32,18 +31,17 @@
 				<span class="input-group-text">Cantidad</span> 
 				<input type="number" name="can" id="can" class="form-control">
 			</div>			
-			<button type="button" class="btn btn-primary" onclick="agregar();">Agregar</button><br><br>
+			<button type="button" class="btn btn-primary" onclick="agregar();">Agregar</button>
+			<button type="button" class="btn btn-primary" onclick="total();">Calcular totales</button><br><br>
 			<div class="input-group mb-3">
 				<span class="input-group-text">Articulo a modificar</span>
 				<select name="option" id="option" class="form-select">
 					<option disabled selected>Seleccione</option>
 				</select>
-				<!--<input type="text" name="art" id="art" class="form-control">-->
 				<span class="input-group-text">Cantidad a rebajar</span>
 				<input type="number" name="reb" id="reb" class="form-control">
 				<button type="button" class="btn btn-primary" onclick="modificar();">Modificar</button><br>
 			</div>
-		</p>
 		<p id="ar">
 			<table class="table table-striped"></table>
 		</p>
@@ -73,7 +71,6 @@
 			cantidad.push(v4);
 			mostrar();
 			option();
-			total();
 		}
 
 		function mostrar(){
@@ -106,6 +103,7 @@
 			let artt=document.getElementById('option').value;
 			let rebb=parseInt(document.getElementById('reb').value);
 			document.getElementById('reb').value="";
+			document.getElementById('option').value="";
 			let resul=0;
 			for(var i = 0; i<nombre.length; i++){
 				if(artt==nombre[i] && cantidad[i]>=rebb){
