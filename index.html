@@ -45,7 +45,7 @@
 				<input type="number" name="reb" id="reb" class="form-control">
 				<button type="button" class="btn btn-primary" onclick="modificar();">Modificar</button><br>
 			</div>
-			<p id="ar"><table class="table table-striped"></table></p>			
+			<p id="ar"></p>			
 			<p id="total"></p>
 		</div>
 	</section>
@@ -71,9 +71,7 @@
 			option();
 		}
 		function mostrar(){
-			let fragmento="";
-			let cantidades=0;
-			fragmento="<table class='table table-striped'><tr><th>Item</th><th>Familia</th><th>Valor $</th><th>Cantidad</th><th>Total Neto $</th><th>Total IVA $</th><th>Total Bruto $</th>";
+			let fragmento="<table class='table table-striped'><tr><th>Item</th><th>Familia</th><th>Valor $</th><th>Cantidad</th><th>Total Neto $</th><th>Total IVA $</th><th>Total Bruto $</th>";
 			for (var i=0; i < nombre.length; i++){
 				fragmento+="<tr><td>"+nombre[i]+"</td>";
 				fragmento+="<td>"+familia[i]+"</td>";
