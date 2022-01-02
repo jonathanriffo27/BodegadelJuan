@@ -58,17 +58,35 @@
 			let v1=document.getElementById('nom').value;
 			let v2=document.getElementById("fam").value;
 			let v3=document.getElementById("val").value;
-			let v4=document.getElementById("can").value;			
+			let v4=document.getElementById("can").value;
+			let pos=existe(v1);	
+			if (pos>=0){
+				nombre[pos]=v1;
+				familia[pos]=v2;
+				valor[pos]=v3;
+				cantidad[pos]=parseInt(cantidad[pos])+parseInt(v4);
+			}else{
+				nombre.push(v1);
+				familia.push(v2);
+				valor.push(v3);
+				cantidad.push(v4);
+			}
 			document.getElementById('nom').value="";
 			document.getElementById('fam').value="";
 			document.getElementById('val').value="";
 			document.getElementById('can').value="";
-			nombre.push(v1);
-			familia.push(v2);
-			valor.push(v3);
-			cantidad.push(v4);
+		
 			mostrar();
 			option();
+		}
+		function existe(nom){
+			let pos=-1;
+			for(var i=0; i<nombre.length; i++){
+				if(nom==nombre[i]){
+					pos=i;
+				}
+			}
+			return pos;
 		}
 		function mostrar(){
 			let fragmento="<table class='table table-striped'><tr><th>Item</th><th>Familia</th><th>Valor $</th><th>Cantidad</th><th>Total Neto $</th><th>Total IVA $</th><th>Total Bruto $</th>";
